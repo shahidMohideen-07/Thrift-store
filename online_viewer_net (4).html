@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Web Designing Question Paper</title>
+
+<style>
+body{
+  font-family: Arial;
+  background:#f2f2f2;
+}
+
+.container{
+  width:750px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  margin-top:20px;
+  border-radius:10px;
+  box-shadow:0 0 10px gray;
+}
+
+h2{
+  text-align:center;
+}
+
+.top-info{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.correct{
+  color:green;
+  font-weight:bold;
+}
+
+.wrong{
+  color:red;
+  font-weight:bold;
+}
+
+button{
+  padding:10px 20px;
+  background:blue;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+button:hover{
+  background:darkblue;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Web Designing Question Paper</h2>
+
+<div class="top-info">
+<div>
+Student Name: <input type="text" id="name">
+</div>
+<div>
+Date: <input type="date" id="date">
+</div>
+</div>
+
+<form id="examForm">
+
+<p>1. What tag creates an HTML document?</p>
+<input type="radio" name="q1" value="a"> &lt;html&gt;<br>
+<input type="radio" name="q1" value="b"> &lt;head&gt;<br>
+<input type="radio" name="q1" value="c"> &lt;title&gt;<br>
+<div id="result1"></div><br>
+
+<p>2. Which tag contains info not displayed on page?</p>
+<input type="radio" name="q2" value="a"> &lt;head&gt;<br>
+<input type="radio" name="q2" value="b"> &lt;body&gt;<br>
+<input type="radio" name="q2" value="c"> &lt;meta&gt;<br>
+<div id="result2"></div><br>
+
+<p>3. Which tag sets visible content?</p>
+<input type="radio" name="q3" value="a"> &lt;main&gt;<br>
+<input type="radio" name="q3" value="b"> &lt;body&gt;<br>
+<input type="radio" name="q3" value="c"> &lt;section&gt;<br>
+<div id="result3"></div><br>
+
+<p>4. Which tag creates unordered list?</p>
+<input type="radio" name="q4" value="a"> &lt;ol&gt;<br>
+<input type="radio" name="q4" value="b"> &lt;ul&gt;<br>
+<input type="radio" name="q4" value="c"> &lt;li&gt;<br>
+<div id="result4"></div><br>
+
+<p>5. Which attribute sets alternate text for images?</p>
+<input type="radio" name="q5" value="a"> src<br>
+<input type="radio" name="q5" value="b"> alt<br>
+<input type="radio" name="q5" value="c"> title<br>
+<div id="result5"></div><br>
+
+<button type="button" onclick="submitExam()">Submit Exam</button>
+
+</form>
+
+<h3 id="finalScore"></h3>
+
+</div>
+
+<script>
+
+function submitExam(){
+
+let name = document.getElementById("name").value;
+let date = document.getElementById("date").value;
+
+if(name=="" || date==""){
+  alert("Please enter name and date");
+  return;
+}
+
+let answers = {
+  q1:"a",
+  q2:"a",
+  q3:"b",
+  q4:"b",
+  q5:"b"
+};
+
+let score=0;
+let total=5;
+
+for(let i=1;i<=total;i++){
+
+let selected = document.querySelector('input[name="q'+i+'"]:checked');
+let resultDiv = document.getElementById("result"+i);
+
+if(selected){
+  if(selected.value===answers["q"+i]){
+    resultDiv.innerHTML="<span class='correct'>Correct ✅</span>";
+    score++;
+  }else{
+    resultDiv.innerHTML="<span class='wrong'>Wrong ❌ | Correct Answer: "+answers["q"+i]+"</span>";
+  }
+}else{
+  resultDiv.innerHTML="<span class='wrong'>Not Attempted ❌</span>";
+}
+}
+
+document.getElementById("finalScore").innerHTML="Total Score: "+score+" / "+total;
+
+
+// EMAIL PART
+let subject = "Web Designing Exam Submission";
+let body = "Student Name: "+name+
+           "%0D%0ADate: "+date+
+           "%0D%0AScore: "+score+"/"+total;
+
+window.location.href =
+"mailto:quratyaseenwani05@gmail.com?subject="+subject+"&body="+body;
+
+}
+
+</script>
+
+</body>
+</html>
